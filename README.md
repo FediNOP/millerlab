@@ -7,8 +7,8 @@
 `PORT` - Порт сервера
 
 ### postgresql
-`POSTGRES_DB_HOST` - Адрес
-`POSTGRES_DB_PORT` - Порт
-`POSTGRES_DB_NAME` - Название бд 
-`POSTGRES_DB_USER` - Пользователь
-`POSTGRES_DB_PASSWORD` - Пароль
+`POSTGRES_DB_HOST` - Адрес <br>
+`POSTGRES_DB_PORT` - Порт <br>
+`POSTGRES_DB_NAME` - Название бд <br> 
+`POSTGRES_DB_USER` - Пользователь <br>
+`POSTGRES_DB_PASSWORD` - Пароль <br>
