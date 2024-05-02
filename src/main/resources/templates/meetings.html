@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"/>
+    <title>Реестр заседаний ПО</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container-fluid" style="margin: 0 auto;">
+    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+         role="alert">
+        [[${message}]]
+        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="my-3" style="max-width: 500px; margin: auto">
+        <form th:action="@{/}">
+            <div class="row d-flex" style="display: inline">
+                <label for="keyword"></label>
+                <input id="keyword" type="search" name="keyword"
+                       th:value="${keyword}" required class="form-control"
+                       placeholder="Инвестор">
+                <div style="align-items: center; margin-top: 10px" class="search-buttons">
+                    <button type="submit" class="btn btn-secondary">Поиск</button>
+                    <button id="btnClear" class="btn btn-info">Очистить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div th:if="${meetingList.size() > 0}" class="my-table" style="max-width: 10024px; margin: auto">
+        <table class="table table-hover table-responsive-xl">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Инвестор</th>
+                <th scope="col">Проект</th>
+                <th scope="col">Муниципальное образование</th>
+                <th scope="col">Протокол ПО</th>
+                <th scope="col">Категория вопроса</th>
+                <th scope="col">Вопрос (поручение) в рамках повестки</th>
+                <th scope="col">Ответственный за исполнение</th>
+                <th scope="col">Срок исполнения</th>
+                <th scope="col">Статус выполнения</th>
+                <th scope="col">Результат выполнения поручения(краткое описание)</th>
+                <th scope="col">Статус решения основного вопроса + краткое описание</th>
+                <th scope="col">Редактировать/Удалить</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="meeting : ${meetingList}">
+                <td th:text="${meeting.id}"></td>
+                <td th:text="${meeting.investor}"></td>
+                <td th:text="${meeting.project}"></td>
+                <td th:text="${meeting.mo}"></td>
+                <td th:text="${meeting.protocol}"></td>
+                <td th:text="${meeting.category}"></td>
+                <td th:text="${meeting.subject}"></td>
+                <td th:text="${meeting.responsible}"></td>
+                <td th:text="${meeting.deadLine}"></td>
+                <td th:text="${meeting.status}"></td>
+                <td th:text="${meeting.result}"></td>
+                <td th:text="${meeting.resultStatus}"></td>
+                <td>
+                    <a th:href="@{'/' + ${meeting.id}}" title="Edit this tutorial"
+                       class="fa-regular fa-pen-to-square icon-dark"></a>
+                    &nbsp;
+                    <a th:href="@{'/delete/' + ${meeting.id}}" id="btnDelete"
+                       title="Удалить заседание" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="" th:unless="${meetingList.size() > 0}">
+        <span>No tutorials found!</span>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <span id="confirmText"></span>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" id="yesBtn" class="btn btn-danger">Да</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-delete").on("click", function (e) {
+            e.preventDefault();
+            link = $(this);
+            $("#yesBtn").attr("href", link.attr("href"));
+            $("#confirmText").html("Вы точно хотите удалить информацию об это заседании? \<strong\>");
+            $("#confirmModal").modal();
+        });
+
+        $("#btnClear").on("click", function (e) {
+            e.preventDefault();
+            $("#keyword").text("");
+            window.location = "[[@{/}]]";
+        });
+    });
+</script>
+
+</body>
+
+</html>
