@@ -71,8 +71,8 @@
                 <td th:text="${meeting.category}"></td>
                 <td th:text="${meeting.subject}"></td>
                 <td th:text="${meeting.responsible}"></td>
-                <td th:text="${meeting.deadLine}"></td>
-                <td th:text="${meeting.status}"></td>
+                <td th:text="${meeting.deadLine}" style="background: "></td>
+                <td th:text="${meeting.status}" class="status-class" th:style="${meeting.getStatusColor()}"></td>
                 <td th:text="${meeting.result}"></td>
                 <td th:text="${meeting.resultStatus}"></td>
                 <td>

@@ -15,7 +15,7 @@
                 category      VARCHAR(255),
                 subject       VARCHAR(255),
                 responsible   VARCHAR(255),
-                dead_line     TIMESTAMP WITHOUT TIME ZONE,
+                dead_line     VARCHAR(255),
                 status        VARCHAR(255),
                 result        VARCHAR(255),
                 result_status VARCHAR(255),
