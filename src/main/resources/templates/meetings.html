@@ -42,7 +42,7 @@
         </form>
     </div>
 
-    <div th:if="${meetingList.size() > 0}" class="my-table" style="max-width: 10024px; margin: auto">
+    <div class="my-table" style="max-width: 10024px; margin: auto">
         <table class="table table-hover table-responsive-xl">
             <thead class="thead-light">
             <tr>
@@ -87,9 +87,6 @@
         </table>
     </div>
 
-    <div class="" th:unless="${meetingList.size() > 0}">
-        <span>No tutorials found!</span>
-    </div>
 </div>
 
 <div class="modal fade text-center" id="confirmModal">
