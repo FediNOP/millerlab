@@ -14,7 +14,7 @@
 `POSTGRES_DB_PASSWORD` - Пароль <br>
 
 ## Первоначальный запуск
-1. Скачать файл devops/docker-compose.yml
+1. Скачать файл devops/compose/docker-compose.yml
 2. Запустить командой `docker compose up -d`
 3. Зайти в админку Postgresql по ссылке http://localhost:5050/ пароль admin
 4. Правой кнопкой по `Servers` -> `Register` -> `Server...`
